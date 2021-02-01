@@ -7,7 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
+    <style>
+        #minh {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+    </style>
     <!-- Title -->
     <title>Little Corner Of Minh</title>
 
@@ -556,9 +562,69 @@
                     <!-- Load More -->
                     
                 </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div id="minh" class="col-md-6">
+                    <h2 style="text-align: center;">Countdown time to go home !</h2>
+                    <br>
+                    <br>
+                    <div class="card bg-danger text-white">
+                    <h3 class="card-title text-center">
+                    <div class="d-flex flex-wrap justify-content-center mt-4">
+                        <span id="time"></span>
+                    </div>
+                    </h3>
+                    </div>
+                </div>
+            <script>
+                function startTimer(duration, display) {
+                    var timer = duration, minutes, seconds, gio, ngay;
+                    setInterval(function () {
+                        ngay = parseInt(timer / (24*60*60), 10);
+                        gio = parseInt((timer-(ngay*24*60*60)) / (60*60), 10);
+                        minutes = parseInt((timer - (ngay*24*60*60) - (gio*60*60))/ 60, 10)
+                        seconds = parseInt(timer % 60, 10);
+                        
+                        
+                        minutes = minutes < 10 ? "0" + minutes : minutes;
+                        seconds = seconds < 10 ? "0" + seconds : seconds;
+                        gio = gio < 10 ? "0" + gio : gio;
+                        ngay = ngay < 10 ? "0" + ngay : ngay;
+                        display.textContent =ngay + " Days " + gio + " Hours " + minutes + " Minutes " + seconds +" Seconds";
+            
+                        if (--timer < 0) {
+                            timer = 0;
+                        }
+                    }, 1000);
+                }
+            
+                window.onload = function () {
+                    var d = new Date();
+                    var n = d.toString();
+                    
+                    var day = n.slice(8,10);
+                    var hours = n.slice(16,18);
+                    var minute = n.slice(19,21);
+                    var secon = n.slice(22,24);
+                    var fiveMinutes = 60 * 5;
+                    var day1 = 5-day;
+                    var hours1 = 15-hours;
+                    var minute1 = 60 - minute;
+                    var secon1 = 60 - secon;
+                    var minhdem = day1*24*60*60+hours1*60*60+minute1*60+secon1;
+                    
+                    display = document.querySelector('#time');
+                    startTimer(minhdem, display);
+                };
+            </script>
 
+                
                 <div id="edu" class="agile-edu">
-       
+                    
 
                 <!-- ##### Sidebar Area ##### -->
                 <div class="col-12 col-md-4 col-lg-3">
