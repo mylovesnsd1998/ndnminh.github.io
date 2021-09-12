@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -111,15 +114,22 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div>                    
         <!-- Logo Area -->
         <div class="logo-area text-center">
             <div class="container h-100">
                 <div class="row h-100 align-items-center">
-                    <div class="col-12">
-                        <img src="img/logo1.png" alt="">
-                    </div>
+                    <div id="hinhnen" class="container6">
+                            <div class="Circle1" id="tron1"></div>
+                            <div class="Circle2" id="tron2"></div>
+                            <div class="Circle3" id="tron3"></div>
+                            <div class="content">
+                                <h1 class="Condition"><span id="test" class="material-icons"></span><h2 id="trangthai" class="Condition2">Sunny</h2></h1>
+                                <h1 id="nhietdo" class="Temp">72</h1>
+                                <h1 id="thoigian" class="Time">09:35</h1>
+                                <h1 class="Location" id="diachi"><i class="material-icons locationIcon">place</i> Tuy An, Phu Yen</h1>
+                            </div>                 
+                    </div>       
                 </div>
             </div>
         </div>
@@ -207,6 +217,8 @@
             </div>
         </div>
     </header>
+
+
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Hero Area Start ##### -->
@@ -767,6 +779,61 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+
+    <script>
+    var url = "http://api.openweathermap.org/data/2.5/weather?id=1563281&appid=fdfdbdf385c8033f3735401485208894";
+    var aPromise = fetch(url);
+    // Work with Promise object:
+    aPromise.then(function(response) {
+        //console.log("OK! Server returns a response object:");
+        //console.log(response);
+        if(!response.ok)  {
+            throw new Error("HTTP error, status = " + response.status);
+        }
+        return response.text();
+      }).then(function(data)  {
+        var obj = JSON.parse(data);
+        var num = obj.main.temp-273.15; 
+        var doc = num.toFixed(1);
+        var d = new Date();
+        document.getElementById("nhietdo").innerHTML = doc + "&#8451;";
+        if (d.getHours() > 18) {
+          document.getElementById("test").innerHTML = "nights_stay";
+          document.getElementById("test").style.color = "white";
+          document.getElementById("trangthai").style.color = "white";
+          document.getElementById("thoigian").style.color = "white";
+          document.getElementById("nhietdo").style.color = "white";
+          document.getElementById("diachi").style.color = "white";
+          document.getElementById("tron1").style.backgroundColor = "#290269";
+          document.getElementById("hinhnen").style.backgroundColor = "#160042";
+          document.getElementById("tron2").style.backgroundColor = "#636f99";
+          document.getElementById("tron3").style.backgroundColor = "#41475c";
+
+        }else{
+          document.getElementById("test").innerHTML = "wb_sunny";
+          document.getElementById("tron1").style.backgroundColor = "rgba(253,184,19,1)";
+          document.getElementById("hinhnen").style.backgroundColor = "#F17022";
+          document.getElementById("tron2").style.backgroundColor = "rgba(246,140,31,0.7)";
+          document.getElementById("tron3").style.backgroundColor = "rgba(241,125,45,0.7)";
+        }
+        
+        document.getElementById("trangthai").innerText = obj.weather[0].main;
+        
+        var phut = d.getMinutes();
+        if (phut < 10) {
+            phut = "0"+phut;
+        }
+        document.getElementById("thoigian").innerHTML = d.getHours() + ":" + phut;
+        var x = setInterval(function() {
+          var c = new Date();
+          var phut2 = c.getMinutes();
+          if (phut2 < 10) {
+            phut2 = "0"+phut2;
+        }
+        document.getElementById("thoigian").innerHTML = c.getHours() + ":" + phut2;
+        }, 60000);
+     })   
+  </script>
 
 </body>
 
