@@ -797,7 +797,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         var doc = num.toFixed(1);
         var d = new Date();
         document.getElementById("nhietdo").innerHTML = doc + "&#8451;";
-        if (d.getHours() > 17) {
+        if (d.getHours() > 17 || d.getHours() < 4) {
           document.getElementById("test").innerHTML = "nights_stay";
           document.getElementById("test").style.color = "white";
           document.getElementById("trangthai").style.color = "white";
@@ -808,7 +808,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           document.getElementById("hinhnen").style.backgroundColor = "#160042";
           document.getElementById("tron2").style.backgroundColor = "#636f99";
           document.getElementById("tron3").style.backgroundColor = "#41475c";
-
         }else{
           document.getElementById("test").innerHTML = "wb_sunny";
           document.getElementById("tron1").style.backgroundColor = "rgba(253,184,19,1)";
